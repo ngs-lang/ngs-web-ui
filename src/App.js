@@ -1,25 +1,51 @@
-import logo from './logo.svg';
 import './App.css';
+import './Timeline'
+import Timeline from "./Timeline";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <div className="App" style={{position: 'absolute', left: 0, top: 0, right: 0, bottom: 0}}>
+            <div style={{
+                verticalAlign: 'bottom',
+                position: 'absolute',
+                left: 0,
+                top: 0,
+                right: 0,
+                bottom: "2em",
+                background: '#EEE'
+            }}>
+                <div style={{position: 'absolute', left: 0, top: 0, width: "20em", bottom: 0, background: '#EEE'}}>
+                    <div className="unobtrusive">Contexts</div>
+                </div>
+                <div style={{position: 'absolute', left: "20em", top: 0, right: "20em", bottom: 0, background: '#FFF'}}>
+                    <Timeline></Timeline>
+                </div>
+                <div style={{position: 'absolute', top: 0, right: 0, width: "20em", bottom: 0, background: '#EEE'}}>
+                    <div className="unobtrusive">Properties and Relations</div>
+                </div>
+            </div>
+            <div style={{
+                position: 'absolute',
+                left: 0,
+                right: 0,
+                bottom: 0,
+                height: "2em",
+                background: '#666',
+                color: '#FFF',
+                verticalAlign: 'bottom'
+            }}>
+                <div style={{
+                    position: 'absolute',
+                    left: "1em",
+                    right: 0,
+                    bottom: "0.5em",
+                    textAlign: 'left'
+                }}>
+                    Next Generation Shell v0.0.1
+                </div>
+            </div>
+        </div>
+    );
 }
 
 export default App;
