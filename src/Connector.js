@@ -4,6 +4,7 @@ const debug = debug0('ngs-web-ui');
 class Connector extends EventTarget {
     constructor() {
         super();
+        this.id = 1;
         this.sock = new WebSocket("ws://localhost:52000/");
 
         this.sock.onmessage = (event) => {
@@ -17,6 +18,19 @@ class Connector extends EventTarget {
     login(code) {
         debug('logging in', code);
         this.sock.send(JSON.stringify({type: 'auth', code: code}));
+    }
+
+    call(method, ...params) {
+        // sock.send(JSON.stringify({"jsonrpc": "2.0", "id": 10, "method": "add_one", "params": [1000]}));
+        const message = JSON.stringify({
+            jsonrpc: '2.0',
+            id: this.id,
+            method,
+            params
+        })
+        this.id += 1;
+        console.log('Connector call', message);
+        this.sock.send(message);
     }
 
 }
