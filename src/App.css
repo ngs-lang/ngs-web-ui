@@ -40,3 +40,7 @@
 .unobtrusive {
   opacity: 50%;
 }
+
+.StatusLine a {
+  color: #FFF;
+}

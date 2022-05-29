@@ -1,10 +1,14 @@
+import React from 'react';
+
 import './App.css';
-import './Timeline'
 import Timeline from "./Timeline";
+import Login from "./Login";
 
 function App() {
+
     return (
         <div className="App" style={{position: 'absolute', left: 0, top: 0, right: 0, bottom: 0}}>
+            <Login/>
             <div style={{
                 verticalAlign: 'bottom',
                 position: 'absolute',
@@ -24,7 +28,7 @@ function App() {
                     <div className="unobtrusive">Properties and Relations</div>
                 </div>
             </div>
-            <div style={{
+            <div className="StatusLine" style={{
                 position: 'absolute',
                 left: 0,
                 right: 0,
@@ -41,7 +45,9 @@ function App() {
                     bottom: "0.5em",
                     textAlign: 'left'
                 }}>
-                    Next Generation Shell v0.0.1
+                    <a title="Next Generation Shell" href="https://github.com/ngs-lang/ngs" target="_blank">NGS</a>
+                    &nbsp;
+                    <a href="https://github.com/ngs-lang/ngs-web-ui" target="_blank">Web UI</a> v0.0.1
                 </div>
             </div>
         </div>
