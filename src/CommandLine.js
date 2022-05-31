@@ -1,5 +1,6 @@
 import connector from './Connector';
 import {Component} from "react";
+import Command from "./Command";
 
 
 class CommandLine extends Component {
@@ -25,7 +26,8 @@ class CommandLine extends Component {
         console.log("ENTER!!!");
         const line = this.state.line;
         this.setState({line: ''});
-        connector.call('eval', line);
+        const id = connector.call('eval', line);
+        this.props.appendCommand(<Command id={id} line={line} key={id}></Command>);
     }
 
     render() {

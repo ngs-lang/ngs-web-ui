@@ -22,15 +22,17 @@ class Connector extends EventTarget {
 
     call(method, ...params) {
         // sock.send(JSON.stringify({"jsonrpc": "2.0", "id": 10, "method": "add_one", "params": [1000]}));
+        const id = this.id;
+        this.id += 1;
         const message = JSON.stringify({
             jsonrpc: '2.0',
-            id: this.id,
+            id,
             method,
             params
         })
-        this.id += 1;
         console.log('Connector call', message);
         this.sock.send(message);
+        return id;
     }
 
 }
