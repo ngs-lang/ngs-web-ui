@@ -7,11 +7,22 @@ class Connector extends EventTarget {
         this.id = 1;
         this.sock = new WebSocket("ws://localhost:52000/");
 
+        let buf = '';
+
         this.sock.onmessage = (event) => {
             console.log('onmessage', event);
-            const data = JSON.parse(event.data);
-            console.log('onmessage - parsed', data);
-            this.dispatchEvent(new CustomEvent('message', {detail: data}));
+            buf += event.data;
+            while(true) {
+                const idx = buf.indexOf('\n');
+                if(idx === -1) {
+                    return;
+                }
+                const chunk = buf.slice(0, idx);
+                buf = buf.slice(idx+1, buf.length);
+                const data = JSON.parse(chunk);
+                console.log('onmessage - parsed', data);
+                this.dispatchEvent(new CustomEvent('message', {detail: data}));
+            }
         }
     }
 
