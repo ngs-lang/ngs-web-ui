@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import connector from "./Connector";
+import {toWidget} from "./ngs-types";
 
 class Command extends Component {
 
@@ -7,35 +8,21 @@ class Command extends Component {
         super(props, context);
 
         this.state = {
-            output: '',
-            error: ''
+            widget: null,
         }
+
+
 
         const listener = (e) => {
             if (e.detail && e.detail.id === props.id) {
                 console.log('Command got message', e.detail);
                 connector.removeEventListener('message', listener);
                 if (e.detail.error) {
-                    this.setState({error: JSON.stringify(e.detail.error.data)});
+                    this.setState({widget: <div>{JSON.stringify(e.detail.error.data)}</div>});
                     return;
                 }
-                if (e.detail.result.type === 'Process') {
-                    this.setState({
-                        'output': <table>
-                            <tbody>
-                            <tr>
-                                <td className='unobtrusive'>stdout</td>
-                                <td><pre>{e.detail.result.stdout}</pre></td>
-                            </tr>
-                            <tr>
-                                <td className='unobtrusive'>stderr</td>
-                                <td><pre>{e.detail.result.stderr}</pre></td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    });
-                    return;
-                }
+                this.setState({'widget': toWidget(e.detail.result)});
+                return;
                 if (Array.isArray(e.detail.result)) {
                     this.setState({
                         'output': <table>
@@ -66,8 +53,7 @@ class Command extends Component {
         return (
             <div style={{backgroundColor: '#EEF', margin: '0.5em', textAlign: 'left'}}>
                 <div>{this.props.line}</div>
-                <div>{this.state.output}</div>
-                <div>{this.state.error}</div>
+                <div>{this.state.widget}</div>
             </div>
         );
     }
