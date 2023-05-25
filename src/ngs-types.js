@@ -12,7 +12,9 @@ types['ngs:type:Process'] = Process;
 
 
 types['ngs:type:Arr'] = Arr;
+types['ngs:type:Lines'] = Arr; // temp hack
 types['ngs:type:Hash'] = Hash;
+types['ngs:type:Namespace'] = Hash; // temp hack
 
 types['ngs:type:Null'] = SpecialScalar;
 types['ngs:type:Bool'] = SpecialScalar;
