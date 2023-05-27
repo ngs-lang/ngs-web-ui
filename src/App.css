@@ -44,3 +44,7 @@
 .StatusLine a {
   color: #FFF;
 }
+
+.Timeline {
+  overflow: scroll;
+}

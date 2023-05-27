@@ -6,6 +6,9 @@ export class SpecialScalar {
     }
 
     toWidget() {
+        if (this.data.value === null) {
+            return <span className="unobtrusive">-</span>
+        }
         return <span>{this.data.value.toString()}</span>
     }
 }
