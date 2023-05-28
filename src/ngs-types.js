@@ -6,6 +6,7 @@ import {ResDef} from "./ngs-types/ResDef";
 import {Res} from "./ngs-types/Res";
 import {Hash} from "./ngs-types/Hash";
 import {Table} from "./ngs-types/Table";
+import {InteractiveObject} from "./ngs-types/InteractiveObject";
 
 const types = {}
 
@@ -17,6 +18,7 @@ types['ngs:type:Lines'] = Arr; // temp hack
 types['ngs:type:Hash'] = Hash;
 types['ngs:type:Namespace'] = Hash; // temp hack
 types['ngs:type:Table2::Table'] = Table;
+types['ngs:type:ui::InteractiveObject'] = InteractiveObject;
 
 types['ngs:type:Null'] = SpecialScalar;
 types['ngs:type:Bool'] = SpecialScalar;

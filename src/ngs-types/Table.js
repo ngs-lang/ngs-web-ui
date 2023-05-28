@@ -7,7 +7,6 @@ export class Table {
     }
 
     toWidget() {
-        console.error('Table.toWidget .data.rows', this.data.rows);
         return <table>
             <thead>
             <tr>
