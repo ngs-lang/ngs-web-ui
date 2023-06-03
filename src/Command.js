@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import connector from "./Connector";
-import {toWidget} from "./ngs-types";
+import {deserialize} from "./ngs-types";
 
 class Command extends Component {
 
@@ -11,8 +11,6 @@ class Command extends Component {
             widget: null,
         }
 
-
-
         const listener = (e) => {
             if (e.detail && e.detail.id === props.id) {
                 console.log('Command got message', e.detail);
@@ -21,32 +19,11 @@ class Command extends Component {
                     this.setState({widget: <div>{JSON.stringify(e.detail.error.data)}</div>});
                     return;
                 }
-                this.setState({'widget': toWidget(e.detail.result)});
-                return;
-                if (Array.isArray(e.detail.result)) {
-                    this.setState({
-                        'output': <table>
-                            <tbody>
-                            {
-                                e.detail.result.map((v, i) =>
-                                    <tr>
-                                        <td>{i}</td>
-                                        <td>{v}</td>
-                                    </tr>
-                                )
-                            }
-                            </tbody>
-                        </table>
-                    });
-                    return;
-
-                }
-                this.setState({'output': e.detail.result});
+                this.setState({'widget': deserialize(e.detail.result).toWidget()});
             }
         };
 
         connector.addEventListener('message', listener)
-
     }
 
     render() {

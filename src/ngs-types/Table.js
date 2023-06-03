@@ -1,10 +1,13 @@
 import React from "react";
-import {toWidget} from "../ngs-types";
+import {deserialize} from "../ngs-types";
 
 export class Table {
-    constructor(a) {
-        this.data = a;
+
+    constructor(columns_names, rows) {
+        this.columns_names = columns_names;
+        this.rows = rows;
     }
+
 
     toWidget() {
         return <table>
@@ -12,20 +15,20 @@ export class Table {
             <tr>
                 <td className="unobtrusive">#</td>
                 {
-                    this.data.columns_names.items.map((v, i) =>
-                        <td key={i}>{v.value}</td>
+                    this.columns_names.map((v, i) =>
+                        <td key={i}>{v.toWidget()}</td>
                     )
                 }
             </tr>
             </thead>
             <tbody>
             {
-                this.data.rows.items.map((row, i) =>
+                this.rows.map((row, i) =>
                     <tr key={i}>
                         <td className="unobtrusive">{i}</td>
                         {
-                            row.items.map((v, i) =>
-                                <td key={i}>{toWidget(v)}</td>
+                            row.map((v, i) =>
+                                <td key={i}>{v.toWidget()}</td>
                             )
                         }
                     </tr>
@@ -33,5 +36,9 @@ export class Table {
             }
             </tbody>
         </table>
+    }
+
+    static deserialize(a) {
+        return new Table(deserialize(a.columns_names), deserialize(a.rows));
     }
 }

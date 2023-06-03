@@ -1,23 +1,29 @@
 import React from "react";
-import {toWidget} from "../ngs-types";
+import {deserialize} from "../ngs-types";
 
-export class Arr {
-    constructor(a) {
-        this.data = a;
-    }
+export class Arr extends Array {
 
     toWidget() {
         return <table>
             <tbody>
             {
-                this.data.items.map((v, i) =>
+                this.map((v, i) =>
                     <tr>
                         <td>{i}</td>
-                        <td>{toWidget(v)}</td>
+                        <td>{v.toWidget()}</td>
                     </tr>
                 )
             }
             </tbody>
         </table>
+    }
+
+    // TODO: Something more elegant
+    static deserialize(a) {
+        const ret = new Arr();
+        for(let item of a.items) {
+            ret.push(deserialize(item));
+        }
+        return ret;
     }
 }

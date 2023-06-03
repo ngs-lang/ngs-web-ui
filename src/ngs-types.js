@@ -1,9 +1,6 @@
-import React from "react";
 import {Process} from "./ngs-types/Process";
 import {Arr} from "./ngs-types/Arr";
-import {SpecialScalar} from "./ngs-types/SpecialScalar";
-import {ResDef} from "./ngs-types/ResDef";
-import {Res} from "./ngs-types/Res";
+import {Scalar} from "./ngs-types/Scalar";
 import {Hash} from "./ngs-types/Hash";
 import {Table} from "./ngs-types/Table";
 import {InteractiveObject} from "./ngs-types/InteractiveObject";
@@ -20,23 +17,19 @@ types['ngs:type:Namespace'] = Hash; // temp hack
 types['ngs:type:Table2::Table'] = Table;
 types['ngs:type:ui::InteractiveObject'] = InteractiveObject;
 
-types['ngs:type:Null'] = SpecialScalar;
-types['ngs:type:Bool'] = SpecialScalar;
-types['ngs:type:Int'] = SpecialScalar;
-types['ngs:type:Real'] = SpecialScalar;
-types['ngs:type:Str'] = SpecialScalar;
+types['ngs:type:Null'] = Scalar;
+types['ngs:type:Bool'] = Scalar;
+types['ngs:type:Int'] = Scalar;
+types['ngs:type:Real'] = Scalar;
+types['ngs:type:Str'] = Scalar;
 
-// TODO: inheritance & check for ResDef, not specific types
-types['ngs:type:AWS2::Vpc'] = ResDef;
-types['ngs:type:AWS2::Instance'] = ResDef;
-
-
-types['ngs:type:AWS2::VpcRes'] = Res;
-types['ngs:type:AWS2::InstanceRes'] = Res;
-
-export function toWidget(x) {
+export function deserialize(x) {
+    console.log('before deserializing', x);
     if (types[x.type]) {
-        return (new types[x.type](x)).toWidget();
+        if(!types[x.type].deserialize) {
+            throw new Error(`${x.type.toString()} has no deserialize() yet`);
+        }
+        return types[x.type].deserialize(x);
     }
-    return <div>toWidget() can't handle type {x.type.toString()} yet</div>
+    throw new Error(`deserialize() can't handle type ${x.type.toString()} yet`);
 }
