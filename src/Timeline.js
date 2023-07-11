@@ -1,13 +1,22 @@
 // import './App.css';
 
+import React, {Component} from 'react';
 import CommandLine from "./CommandLine";
-import {Component} from "react";
+import connector from "./Connector";
+import Command from "./Command";
 
 class Timeline extends Component {
 
     constructor(props, context) {
         super(props, context);
         this.state = {'commands': []};
+        connector.addEventListener('timeline_new_command', (e) => {
+            console.log('Timeline got new command', e);
+            // const command = <Command key={e.detail.id} id={e.detail.id} line={e.detail.line}></Command>;
+            const line = e.detail.slowGetScalarKey('command').map(elt => elt.value).join(' ');
+            const command = <Command line={line} widget={e.detail.toWidget()}></Command>;
+            this.appendCommand(command);
+        })
     }
 
     appendCommand(c) {

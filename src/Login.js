@@ -32,7 +32,7 @@ export default class Login extends Component {
         setTimeout(() => {
             // Socket is not ready yet without this delay
             connector.login((new URLSearchParams(window.location.search)).get('secret'));
-        }, 1000);
+        }, 2000);
     }
 
     render() {

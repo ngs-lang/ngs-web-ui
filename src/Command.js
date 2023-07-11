@@ -8,29 +8,31 @@ class Command extends Component {
         super(props, context);
 
         this.state = {
-            widget: null,
+            widget: props.widget || null,
         }
 
-        const listener = (e) => {
-            if (e.detail && e.detail.id === props.id) {
-                console.log('Command got message', e.detail);
-                connector.removeEventListener('message', listener);
-                if (e.detail.error) {
-                    this.setState({widget: <div>{JSON.stringify(e.detail.error.data)}</div>});
-                    return;
+        if(!this.state.widget) {
+            const listener = (e) => {
+                if (e.detail && e.detail.id === props.id) {
+                    console.log('Command got message', e.detail);
+                    connector.removeEventListener('message', listener);
+                    if (e.detail.error) {
+                        this.setState({widget: <div>{JSON.stringify(e.detail.error.data)}</div>});
+                        return;
+                    }
+                    this.setState({'widget': deserialize(e.detail.result).toWidget()});
                 }
-                this.setState({'widget': deserialize(e.detail.result).toWidget()});
-            }
-        };
+            };
 
-        connector.addEventListener('message', listener)
+            connector.addEventListener('message', listener)
+        }
     }
 
     render() {
         return (
-            <div style={{backgroundColor: '#EEF', margin: '0.5em', textAlign: 'left'}}>
-                <div>{this.props.line}</div>
-                <div>{this.state.widget}</div>
+            <div style={{margin: '0.5em', textAlign: 'left'}}>
+                <div style={{fontWeight: 'bold'}}>{this.props.line}</div>
+                <div style={{backgroundColor: '#EEE'}}>{this.state.widget}</div>
             </div>
         );
     }
