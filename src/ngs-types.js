@@ -4,10 +4,20 @@ import {Scalar} from "./ngs-types/Scalar";
 import {Hash} from "./ngs-types/Hash";
 import {Table} from "./ngs-types/Table";
 import {InteractiveObject} from "./ngs-types/InteractiveObject";
+import {Progress} from "./ngs-types/Progress";
+import {Revision} from "./ngs-types/Revision";
+import {Source} from "./ngs-types/Source";
+import {Action} from "./ngs-types/Action";
+import {LongValue} from "./ngs-types/LongValue";
 
 const types = {}
 
 types['ngs:type:Process'] = Process;
+types['ngs:type:saws::Progress'] = Progress;
+types['ngs:type:saws::Revision'] = Revision;
+types['ngs:type:saws::Source'] = Source;
+types['ngs:type:saws::Action'] = Action;
+types['ngs:type:saws::LongValue'] = LongValue;
 
 
 types['ngs:type:Arr'] = Arr;

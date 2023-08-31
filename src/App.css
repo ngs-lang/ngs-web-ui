@@ -48,3 +48,15 @@
 .Timeline {
   overflow: scroll;
 }
+
+td {
+  padding: 0.25em;
+}
+
+.MoreInfo {
+  border-bottom: dotted;
+}
+
+.ItemName {
+  font-weight: bold;
+}

@@ -9,7 +9,7 @@ export class Arr extends Array {
             {
                 this.map((v, i) =>
                     <tr>
-                        <td>{i}</td>
+                        {/*<td>{i}</td>*/}
                         <td>{v.toWidget()}</td>
                     </tr>
                 )

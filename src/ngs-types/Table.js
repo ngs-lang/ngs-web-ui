@@ -13,7 +13,7 @@ export class Table {
         return <table>
             <thead>
             <tr>
-                <td className="unobtrusive">#</td>
+                {/*<td className="unobtrusive">#</td>*/}
                 {
                     this.columns_names.map((v, i) =>
                         <td key={i}>{v.toWidget()}</td>
@@ -25,7 +25,7 @@ export class Table {
             {
                 this.rows.map((row, i) =>
                     <tr key={i}>
-                        <td className="unobtrusive">{i}</td>
+                        {/*<td className="unobtrusive">{i}</td>*/}
                         {
                             row.map((v, i) =>
                                 <td key={i}>{v.toWidget()}</td>
