@@ -8,8 +8,6 @@ export class Status {
     toWidget() {
         return <span>{this.text.value}</span>
     }
-
-
 }
 
 export class Succeeded extends Status {
