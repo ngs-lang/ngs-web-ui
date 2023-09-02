@@ -8,7 +8,8 @@ import {Progress} from "./ngs-types/Progress";
 import {Revision} from "./ngs-types/Revision";
 import {Source} from "./ngs-types/Source";
 import {Action} from "./ngs-types/Action";
-import {LongValue} from "./ngs-types/LongValue";
+import {LongStr} from "./ngs-types/LongStr";
+import {Succeeded, Failed} from "./ngs-types/ProcessStatus";
 
 const types = {}
 
@@ -17,7 +18,9 @@ types['ngs:type:saws::Progress'] = Progress;
 types['ngs:type:saws::Revision'] = Revision;
 types['ngs:type:saws::Source'] = Source;
 types['ngs:type:saws::Action'] = Action;
-types['ngs:type:saws::LongValue'] = LongValue;
+types['ngs:type:saws::LongStr'] = LongStr;
+types['ngs:type:ProcessStatus::Failed'] = Failed;
+types['ngs:type:ProcessStatus::Succeeded'] = Succeeded;
 
 
 types['ngs:type:Arr'] = Arr;

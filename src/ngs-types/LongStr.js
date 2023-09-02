@@ -1,6 +1,6 @@
 import {deserialize} from "../ngs-types";
 
-export class LongValue {
+export class LongStr {
     constructor(val) {
         this.val = val;
     }
@@ -10,6 +10,6 @@ export class LongValue {
     }
 
     static deserialize(a) {
-        return new LongValue(deserialize(a.fields.val));
+        return new LongStr(deserialize(a.fields.val));
     }
 }
