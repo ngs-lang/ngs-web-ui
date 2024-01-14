@@ -60,3 +60,11 @@ td {
 .ItemName {
   font-weight: bold;
 }
+
+.status-succeeded {
+  color: #4A4;
+}
+
+.status-failed {
+  color: #A44;
+}

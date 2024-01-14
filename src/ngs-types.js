@@ -14,11 +14,11 @@ import {Succeeded, Failed} from "./ngs-types/ProcessStatus";
 const types = {}
 
 types['ngs:type:Process'] = Process;
-types['ngs:type:saws::Progress'] = Progress;
-types['ngs:type:saws::Revision'] = Revision;
-types['ngs:type:saws::Source'] = Source;
-types['ngs:type:saws::Action'] = Action;
-types['ngs:type:saws::LongStr'] = LongStr;
+types['ngs:type:CodePipeline::Progress'] = Progress;
+types['ngs:type:CodePipeline::Revision'] = Revision;
+types['ngs:type:CodePipeline::Source'] = Source;
+types['ngs:type:CodePipeline::Action'] = Action;
+types['ngs:type:CodePipeline::LongStr'] = LongStr;
 types['ngs:type:ProcessStatus::Failed'] = Failed;
 types['ngs:type:ProcessStatus::Succeeded'] = Succeeded;
 
