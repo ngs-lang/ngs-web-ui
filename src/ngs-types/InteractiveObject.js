@@ -52,7 +52,4 @@ export class InteractiveObject {
         </a>
     }
 
-    static deserialize(a) {
-        return new InteractiveObject(deserialize(a.fields.type), deserialize(a.fields.id), deserialize(a.fields.text), deserialize(a.fields.default_action));
-    }
 }

@@ -1,5 +1,4 @@
 import React from "react";
-import {deserialize} from "../ngs-types";
 import {Scalar} from "./Scalar";
 
 export class Hash extends Map {
@@ -38,11 +37,4 @@ export class Hash extends Map {
         </table>
     }
 
-    static deserialize(a) {
-        const ret = new Hash();
-        for(let item of a.items) {
-            ret.set(deserialize(item[0]), deserialize(item[1]));
-        }
-        return ret;
-    }
 }

@@ -1,6 +1,4 @@
 import React from "react";
-import {deserialize} from "../ngs-types";
-
 // command executable pid exit_code exit_signal stdout stderr
 
 export class Process {
@@ -35,17 +33,5 @@ export class Process {
         } else {
             return <pre>{this.stdout.value}</pre>;
         }
-    }
-
-    static deserialize(a) {
-        return new Process(
-            'TODO' || deserialize(a.fields.command),
-            'TODO' || deserialize(a.fields.executable),
-            deserialize(a.fields.pid),
-            deserialize(a.fields.exit_code),
-            deserialize(a.fields.exit_signal),
-            deserialize(a.fields.stdout),
-            deserialize(a.fields.stderr)
-        );
     }
 }

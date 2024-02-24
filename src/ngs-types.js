@@ -1,48 +1,63 @@
-import {Process} from "./ngs-types/Process";
-import {Arr} from "./ngs-types/Arr";
+// WIP. Don't remove commented out imports.
+// import {Process} from "./ngs-types/Process";
 import {Scalar} from "./ngs-types/Scalar";
-import {Hash} from "./ngs-types/Hash";
+import {List} from "./ngs-types/List";
+// import {Hash} from "./ngs-types/Hash";
 import {Table} from "./ngs-types/Table";
-import {InteractiveObject} from "./ngs-types/InteractiveObject";
+import {Column} from "./ngs-types/Column";
+import {Columns} from "./ngs-types/Columns";
+import {Row} from "./ngs-types/Row";
+import {Rows} from "./ngs-types/Rows";
+// import {InteractiveObject} from "./ngs-types/InteractiveObject";
 import {Progress} from "./ngs-types/Progress";
-import {Revision} from "./ngs-types/Revision";
-import {Source} from "./ngs-types/Source";
-import {Action} from "./ngs-types/Action";
-import {LongStr} from "./ngs-types/LongStr";
-import {Succeeded, Failed} from "./ngs-types/ProcessStatus";
+// import {Revision} from "./ngs-types/Revision";
+// import {Source} from "./ngs-types/Source";
+// import {Action} from "./ngs-types/Action";
+// import {LongStr} from "./ngs-types/LongStr";
+import {ProcessStatus} from "./ngs-types/ProcessStatus";
+import {Object_} from "./ngs-types/Object";
+//
+// Reorganize: 'types' should be in a separate file
+const types = {
+    Scalar,
+    List,
 
-const types = {}
+    Object: Object_,
+    ProcessStatus,
+    Progress,
 
-types['ngs:type:Process'] = Process;
-types['ngs:type:CodePipeline::Progress'] = Progress;
-types['ngs:type:CodePipeline::Revision'] = Revision;
-types['ngs:type:CodePipeline::Source'] = Source;
-types['ngs:type:CodePipeline::Action'] = Action;
-types['ngs:type:CodePipeline::LongStr'] = LongStr;
-types['ngs:type:ProcessStatus::Failed'] = Failed;
-types['ngs:type:ProcessStatus::Succeeded'] = Succeeded;
-
-
-types['ngs:type:Arr'] = Arr;
-types['ngs:type:Lines'] = Arr; // temp hack
-types['ngs:type:Hash'] = Hash;
-types['ngs:type:Namespace'] = Hash; // temp hack
-types['ngs:type:Table2::Table'] = Table;
-types['ngs:type:ui::InteractiveObject'] = InteractiveObject;
-
-types['ngs:type:Null'] = Scalar;
-types['ngs:type:Bool'] = Scalar;
-types['ngs:type:Int'] = Scalar;
-types['ngs:type:Real'] = Scalar;
-types['ngs:type:Str'] = Scalar;
+    Table,
+    Column,
+    Columns,
+    Row,
+    Rows
+}
 
 export function deserialize(x) {
-    console.log('before deserializing', x);
-    if (types[x.type]) {
-        if(!types[x.type].deserialize) {
-            throw new Error(`${x.type.toString()} has no deserialize() yet`);
-        }
-        return types[x.type].deserialize(x);
+    if(Array.isArray(x)) {
+        return x.map(deserialize);
     }
-    throw new Error(`deserialize() can't handle type ${x.type.toString()} yet`);
+    if(x === null) {
+        return null;
+    }
+    if(typeof x === 'object') {
+        // NGS: o = x.mapv(deserialize)
+        // TS:
+        if(x['$type'] === '$raw') {
+            return x;
+        }
+        const o = Object.fromEntries(Object.entries(x).map(entry => {
+            return [entry[0], deserialize(entry[1])]
+        }));
+        if(!x['$type']) {
+            throw Error('Missing $type in object ' + JSON.stringify(o));
+        }
+        const t = types[x['$type']];
+        if(!t) {
+            throw Error(`Unknown type ${x['$type']} in object ${JSON.stringify(o)}`);
+        }
+        return new t(o);
+    }
+    // scalar or something unexpected
+    return x;
 }

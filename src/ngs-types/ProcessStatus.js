@@ -1,25 +1,22 @@
-import {deserialize} from "../ngs-types";
-
-export class Status {
-    constructor(val) {
-        this.text = val;
+export class ProcessStatus {
+    constructor({name, text}) {
+        this.name = name;
+        this.text = text;
     }
-}
-
-export class Succeeded extends Status {
     toWidget() {
-        return <span className={'status-succeeded'}>{this.text.value}</span>
-    }
-    static deserialize(a) {
-        return new Succeeded(deserialize(a.fields.text));
+        return <span className={`status-${this.name}`}>{this.text}</span>
+
     }
 }
 
-export class Failed extends Status {
-    toWidget() {
-        return <span className={'status-failed'}>{this.text.value}</span>
-    }
-    static deserialize(a) {
-        return new Failed(deserialize(a.fields.text));
-    }
-}
+// export class Succeeded extends ProcessStatus {
+//     toWidget() {
+//         return <span className={'status-succeeded'}>{this.text.value}</span>
+//     }
+// }
+//
+// export class Failed extends ProcessStatus {
+//     toWidget() {
+//         return <span className={'status-failed'}>{this.text.value}</span>
+//     }
+// }

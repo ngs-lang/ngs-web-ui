@@ -61,10 +61,20 @@ td {
   font-weight: bold;
 }
 
-.status-succeeded {
+.status-Succeeded {
   color: #4A4;
 }
 
-.status-failed {
+.status-Failed {
   color: #A44;
+}
+
+.Object {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.Object:hover {
+  cursor: pointer;
+  background-color: #FFFFEE;
 }

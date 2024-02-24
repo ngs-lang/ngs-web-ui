@@ -47,7 +47,7 @@ function App() {
                 }}>
                     <a title="Next Generation Shell" href="https://github.com/ngs-lang/ngs" target="_blank">NGS</a>
                     &nbsp;
-                    <a href="https://github.com/ngs-lang/ngs-web-ui" target="_blank">Web UI</a> v0.0.1
+                    <a href="https://github.com/ngs-lang/ngs-web-ui" target="_blank">Web UI</a> v0.1.0
                 </div>
             </div>
         </div>
