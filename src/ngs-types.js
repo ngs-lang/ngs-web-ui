@@ -35,6 +35,10 @@ const types = {
     Rows
 }
 
+function filterObj(x, pred) {
+    return Object.fromEntries(Object.entries(x).filter(([k, v]) => pred(k, v)));
+}
+
 export function deserialize(x) {
     if(Array.isArray(x)) {
         return x.map(deserialize);
@@ -43,16 +47,18 @@ export function deserialize(x) {
         return null;
     }
     if(typeof x === 'object') {
+        // NGS: xx = x.filterk(Not('$type'))
+        // TS:
+        const xx = filterObj(x, (k, _) => k !== '$type');
         // TODO: sanitize?
         // NGS: o = x.mapv(deserialize)
         // TS:
         if(x['$type'] === '$raw') {
-            return x;
+            return xx;
         }
-        const o = Object.fromEntries(Object.entries(x).map(entry => {
+        const o = Object.fromEntries(Object.entries(xx).map(entry => {
             return [entry[0], deserialize(entry[1])]
         }));
-        delete o['$type']; // TODO: maybe filter out the '$type' key earlier
         if(x['$type'] === 'Hash') {
             return o;
         }
