@@ -3,6 +3,7 @@
 import {Scalar} from "./ngs-types/Scalar";
 import {List} from "./ngs-types/List";
 // import {Hash} from "./ngs-types/Hash";
+import {Properties} from "./ngs-types/Properties";
 import {Table} from "./ngs-types/Table";
 import {Column} from "./ngs-types/Column";
 import {Columns} from "./ngs-types/Columns";
@@ -21,6 +22,7 @@ import {Object_} from "./ngs-types/Object";
 const types = {
     Scalar,
     List,
+    Properties,
 
     Object: Object_,
     ProcessStatus,
@@ -41,6 +43,7 @@ export function deserialize(x) {
         return null;
     }
     if(typeof x === 'object') {
+        // TODO: sanitize?
         // NGS: o = x.mapv(deserialize)
         // TS:
         if(x['$type'] === '$raw') {
@@ -49,6 +52,10 @@ export function deserialize(x) {
         const o = Object.fromEntries(Object.entries(x).map(entry => {
             return [entry[0], deserialize(entry[1])]
         }));
+        delete o['$type']; // TODO: maybe filter out the '$type' key earlier
+        if(x['$type'] === 'Hash') {
+            return o;
+        }
         if(!x['$type']) {
             throw Error('Missing $type in object ' + JSON.stringify(o));
         }
