@@ -31,6 +31,7 @@ class Connector extends EventTarget {
         this.sock.send(JSON.stringify({type: 'auth', code: code}));
     }
 
+    // Maybe TODO: support Object params, not just Array
     call(method, ...params) {
         // sock.send(JSON.stringify({"jsonrpc": "2.0", "id": 10, "method": "add_one", "params": [1000]}));
         const id = this.id;
