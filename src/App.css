@@ -45,8 +45,33 @@
   color: #FFF;
 }
 
-.Timeline {
+.TimelineContainer {
   overflow: scroll;
+  text-align: left;
+}
+
+/* Semantically incorrect */
+.TimelineContainer > .unobtrusive {
+  text-align: center;
+}
+
+.GroupTimelineItem {
+  border: 1px solid #EEE;
+  border-radius: 0.25em;
+  margin: 1em;
+}
+
+.CommandTimelineItem-command {
+  background-color: #EEEEEE;
+  padding: 0.5em;
+}
+
+.ResultTimelineItem {
+  padding: 0.5em;
+}
+
+.CommandLine {
+  text-align: center;
 }
 
 td {

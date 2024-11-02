@@ -1,11 +1,21 @@
 import debug0 from 'debug';
-const debug = debug0('ngs-web-ui');
+import {deserialize} from "./ngs-types";
+const debug = debug0('ngs-web-ui'); // TODO: use it
 
 class Connector extends EventTarget {
     constructor() {
         super();
+        console.log('Connector being constructed');
         this.id = 1;
+        this.last_seen_version = null;
         this.sock = new WebSocket("ws://localhost:52000/");
+
+        const pleaseAuthReceivedPromiseWithResolvers = Promise.withResolvers();
+        this.pleaseAuthReceived = pleaseAuthReceivedPromiseWithResolvers.promise;
+
+        const loggedInPromiseWithResolvers = Promise.withResolvers();
+        this.loggedIn = loggedInPromiseWithResolvers.promise;
+        this.loggingIn = false;
 
         let buf = '';
 
@@ -21,19 +31,45 @@ class Connector extends EventTarget {
                 buf = buf.slice(idx+1, buf.length);
                 const data = JSON.parse(chunk);
                 console.log('onmessage - parsed', data);
+
+                if(data.type === 'auth_ok') {
+                    loggedInPromiseWithResolvers.resolve();
+                }
+
+                if(data.type === 'please_auth') {
+                    pleaseAuthReceivedPromiseWithResolvers.resolve();
+                }
+
+                // TODO: more precise rules about when to deserialize
+                if(data.result && data.result['$type']) {
+                    data.result = deserialize(data.result);
+                }
+
                 this.dispatchEvent(new CustomEvent('message', {detail: data}));
             }
         }
+
+        this.loggedIn.then(() => {
+            this.startPolling()
+        });
     }
 
-    login(code) {
-        debug('logging in', code);
+    // TODO: reorganize code in a more React-aligned way
+    async login(code) {
+        if(this.loggingIn) {
+            console.error('Connector.login(): Already logging in or logged in');
+            return;
+        }
+        this.loggingIn = true;
+        console.log('logging in', code , this.sock);
+        await this.pleaseAuthReceived;
+        console.log('sending auth');
         this.sock.send(JSON.stringify({type: 'auth', code: code}));
     }
 
     // Maybe TODO: support Object params, not just Array
-    call(method, ...params) {
-        // sock.send(JSON.stringify({"jsonrpc": "2.0", "id": 10, "method": "add_one", "params": [1000]}));
+    async call(method, ...params) {
+        await this.loggedIn;
         const id = this.id;
         this.id += 1;
         const message = JSON.stringify({
@@ -45,6 +81,34 @@ class Connector extends EventTarget {
         console.log('Connector call', message);
         this.sock.send(message);
         return id;
+    }
+
+    waitForResponse(id) {
+        const p = Promise.withResolvers();
+        console.log('waitForResponse() waiting for', id);
+        const listener = (e) => {
+            if(e.detail.id === id) {
+                console.log('waitForResponse() got response for', id);
+                this.removeEventListener('message', listener);
+                p.resolve(e.detail);
+            }
+        }
+        this.addEventListener('message', listener);
+        return p.promise;
+    }
+
+    async startPolling() {
+        // noinspection InfiniteLoopJS
+        while(true) {
+            const id = await this.call('poll', this.last_seen_version);
+            console.log('poll id', id);
+            const response = await this.waitForResponse(id);
+            console.log('poll response', response);
+            this.last_seen_version = response.result.version;
+            const timeline = deserialize(response.result.timeline)
+            console.log('poll deserialized timeline', timeline);
+            this.dispatchEvent(new CustomEvent('timeline', {detail: timeline}));
+        }
     }
 
 }

@@ -1,6 +1,10 @@
 import {Scalar} from "./ngs-types/Scalar";
 import {List} from "./ngs-types/List";
 import {Properties} from "./ngs-types/Properties";
+import {Timeline} from "./ngs-types/Timeline";
+import {GroupTimelineItem} from "./ngs-types/GroupTimelineItem";
+import {TextualCommandTimelineItem} from "./ngs-types/TextualCommandTimelineItem";
+import {ResultTimelineItem} from "./ngs-types/ResultTimelineItem";
 import {Table} from "./ngs-types/Table";
 import {Column} from "./ngs-types/Column";
 import {Columns} from "./ngs-types/Columns";
@@ -15,6 +19,11 @@ const types = {
     Scalar,
     List,
     Properties,
+
+    GroupTimelineItem,
+    Timeline,
+    TextualCommandTimelineItem,
+    ResultTimelineItem,
 
     Object: Object_,
     ProcessStatus,

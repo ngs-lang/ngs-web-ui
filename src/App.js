@@ -1,7 +1,7 @@
 import React from 'react';
 
 import './App.css';
-import Timeline from "./Timeline";
+import TimelineContainer from "./TimelineContainer";
 import Login from "./Login";
 
 function App() {
@@ -22,7 +22,7 @@ function App() {
                     <div className="unobtrusive">Contexts</div>
                 </div>
                 <div style={{position: 'absolute', left: "20em", top: 0, right: "20em", bottom: 0, background: '#FFF'}}>
-                    <Timeline></Timeline>
+                    <TimelineContainer></TimelineContainer>
                 </div>
                 <div style={{position: 'absolute', top: 0, right: 0, width: "20em", bottom: 0, background: '#EEE'}}>
                     <div className="unobtrusive">Properties and Relations</div>

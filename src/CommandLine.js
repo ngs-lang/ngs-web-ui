@@ -1,6 +1,5 @@
 import connector from './Connector';
 import {Component} from "react";
-import Command from "./Command";
 
 
 class CommandLine extends Component {
@@ -18,7 +17,7 @@ class CommandLine extends Component {
         this.setState({line: event.target.value});
     }
 
-    keyUp(event) {
+    async keyUp(event) {
         // https://stackoverflow.com/questions/7060750/detect-the-enter-key-in-a-text-input-field
         if (event.key !== "Enter") {
             return;
@@ -26,8 +25,8 @@ class CommandLine extends Component {
         console.log("ENTER!!!");
         const line = this.state.line;
         this.setState({line: ''});
-        const id = connector.call('eval', line);
-        this.props.appendCommand(<Command id={id} line={line} key={id}></Command>);
+        const id = await connector.call('eval', line);
+        console.log('CommandLine call', {id, line});
     }
 
     render() {
