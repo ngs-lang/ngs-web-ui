@@ -66,6 +66,12 @@
   padding: 0.5em;
 }
 
+.InfoTimelineItem-info {
+  color: #888;
+  padding: 0.5em;
+  font-style: italic;
+}
+
 .ResultTimelineItem {
   padding: 0.5em;
 }

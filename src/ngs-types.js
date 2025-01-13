@@ -4,6 +4,7 @@ import {Properties} from "./ngs-types/Properties";
 import {Timeline} from "./ngs-types/Timeline";
 import {GroupTimelineItem} from "./ngs-types/GroupTimelineItem";
 import {TextualCommandTimelineItem} from "./ngs-types/TextualCommandTimelineItem";
+import {InfoTimelineItem} from "./ngs-types/InfoTimelineItem";
 import {ResultTimelineItem} from "./ngs-types/ResultTimelineItem";
 import {Table} from "./ngs-types/Table";
 import {Column} from "./ngs-types/Column";
@@ -23,6 +24,7 @@ const types = {
     GroupTimelineItem,
     Timeline,
     TextualCommandTimelineItem,
+    InfoTimelineItem,
     ResultTimelineItem,
 
     Object: Object_,
