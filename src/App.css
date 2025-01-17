@@ -72,6 +72,11 @@
   font-style: italic;
 }
 
+.GuessTimelineItem {
+  padding: 0.5em;
+  font-style: italic;
+}
+
 .ResultTimelineItem {
   padding: 0.5em;
 }
