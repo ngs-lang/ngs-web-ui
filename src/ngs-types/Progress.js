@@ -5,7 +5,7 @@ export class Progress {
     }
 
     toWidget() {
-        return <progress value={this.step} max={this.total_steps}>{this.step}/{this.total_steps}</progress>
+        return <progress title={`${this.step}/${this.total_steps}`} value={this.step} max={this.total_steps}>{this.step}/{this.total_steps}</progress>
     }
 
 }
