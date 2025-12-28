@@ -1,13 +1,10 @@
-// import './App.css';
-
 import React, {Component} from 'react';
-import CommandLine from "./CommandLine";
 import connector from "./Connector";
 
 class TimelineContainer extends Component {
 
-    constructor(props, context) {
-        super(props, context);
+    constructor(props) {
+        super(props);
         this.state = {'timeline': null};
         connector.addEventListener('timeline', (e) => {
             console.log('TimelineContainer got timeline', e.detail);
@@ -31,11 +28,10 @@ class TimelineContainer extends Component {
                      right: 0,
                      bottom: 0
                  }}>
-                <div className="unobtrusive" onClick={this.clear.bind(this)} title="Click to clear">Timeline</div>
+                <div className="unobtrusive" onClick={this.clear.bind(this)} title="Click to clear (development tool)">Timeline</div>
                 <div style={{marginTop: 'auto', marginBottom: '3em'}}>
                     {this.state.timeline}
                 </div>
-                <CommandLine></CommandLine>
             </div>
         );
     }

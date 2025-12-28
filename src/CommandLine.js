@@ -31,7 +31,7 @@ class CommandLine extends Component {
 
     render() {
         return (
-            <div className="CommandLine" style={{position: "absolute", left: 0, right: 0, bottom: "1em"}}>
+            <div className="CommandLine">
                 <input type="text" value={this.state.line} style={{width: "90%"}} onChange={this.handleChange} onKeyUp={this.keyUp} autoFocus></input>
             </div>
         );

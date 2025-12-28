@@ -2,6 +2,7 @@ import React from 'react';
 
 import './App.css';
 import TimelineContainer from "./TimelineContainer";
+import CommandLine from "./CommandLine";
 import Login from "./Login";
 
 function App() {
@@ -21,9 +22,14 @@ function App() {
                 <div style={{position: 'absolute', left: 0, top: 0, width: "20em", bottom: 0, background: '#EEE'}}>
                     <div className="unobtrusive">Contexts</div>
                 </div>
-                <div style={{position: 'absolute', left: "20em", top: 0, right: "20em", bottom: 0, background: '#FFF'}}>
+                {/* timeline and command line in the center - start */}
+                <div style={{position: 'absolute', left: "20em", top: 0, right: "20em", bottom: "3em", background: '#FFF'}}>
                     <TimelineContainer></TimelineContainer>
                 </div>
+                <div style={{position: 'absolute', left: "20em", height: "3em", right: "20em", bottom: 0, background: '#FFF'}}>
+                    <CommandLine></CommandLine>
+                </div>
+                {/* timeline and command line in the center - end */}
                 <div style={{position: 'absolute', top: 0, right: 0, width: "20em", bottom: 0, background: '#EEE'}}>
                     <div className="unobtrusive">Properties and Relations</div>
                 </div>

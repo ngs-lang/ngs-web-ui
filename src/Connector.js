@@ -21,6 +21,10 @@ class Connector extends EventTarget {
 
         this.sock.onmessage = (event) => {
             console.log('onmessage', event);
+            if (event.data === 'ping') {
+                console.debug('got ping');
+                return;
+            }
             buf += event.data;
             while(true) {
                 const idx = buf.indexOf('\n');
