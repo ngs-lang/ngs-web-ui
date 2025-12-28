@@ -22,6 +22,12 @@ export default class Login extends Component {
                 console.log('Login got message -- auth_ok');
                 this.setState({isOpen: false});
                 connector.removeEventListener('message', listener);
+                if (window.location.search !== '') {
+                    // The browser is not smart enough to do nothing
+                    // if search was already empty string. It does navigate,
+                    // causing endless loop. Therefore, the "if" is necessary.
+                    window.location.search = '';
+                };
             }
             if (e.detail?.type === 'auth_fail') {
                 console.log('Login got message -- auth_fail');
@@ -30,7 +36,7 @@ export default class Login extends Component {
         };
 
         connector.addEventListener('message', listener)
-        connector.login((new URLSearchParams(window.location.search)).get('secret'));
+        connector.login((new URLSearchParams(window.location.search)).get('code'));
     }
 
     render() {

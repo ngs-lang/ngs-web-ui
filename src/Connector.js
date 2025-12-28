@@ -33,6 +33,12 @@ class Connector extends EventTarget {
                 console.log('onmessage - parsed', data);
 
                 if(data.type === 'auth_ok') {
+                    // Using localStorage will make the secret available
+                    // to other apps that happen to run on the same origin.
+                    // During development it's http://127.0.0.1:PORT
+                    // It only takes an app to listen on the same port (at another time) to get the secret.
+                    // Hence, sessionStorage.
+                    sessionStorage.setItem('secret', data.secret);
                     loggedInPromiseWithResolvers.resolve();
                 }
 
@@ -64,7 +70,8 @@ class Connector extends EventTarget {
         console.log('logging in', code , this.sock);
         await this.pleaseAuthReceived;
         console.log('sending auth');
-        this.sock.send(JSON.stringify({type: 'auth', code: code}));
+        const secret = sessionStorage.getItem('secret');
+        this.sock.send(JSON.stringify({type: 'auth', code, secret}));
     }
 
     // Maybe TODO: support Object params, not just Array
