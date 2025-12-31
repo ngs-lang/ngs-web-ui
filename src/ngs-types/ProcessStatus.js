@@ -3,20 +3,20 @@ export class ProcessStatus {
         this.name = name;
         this.text = text;
     }
-    toWidget() {
+    toWidget(_ctx) {
         return <span className={`status-${this.name}`}>{this.text}</span>
 
     }
 }
 
 // export class Succeeded extends ProcessStatus {
-//     toWidget() {
+//     toWidget(_ctx) {
 //         return <span className={'status-succeeded'}>{this.text.value}</span>
 //     }
 // }
 //
 // export class Failed extends ProcessStatus {
-//     toWidget() {
+//     toWidget(_ctx) {
 //         return <span className={'status-failed'}>{this.text.value}</span>
 //     }
 // }

@@ -6,7 +6,7 @@ export class TextualCommandTimelineItem {
         this.command = command;
     }
 
-    toWidget() {
+    toWidget(_ctx) {
         return (
             <div key={this.id} className="CommandTimelineItem">
                 <div className="CommandTimelineItem-command">{this.command}</div>

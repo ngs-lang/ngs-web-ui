@@ -6,7 +6,7 @@ export class InfoTimelineItem {
         this.info = info;
     }
 
-    toWidget() {
+    toWidget(_ctx) {
         return (
             <div key={this.id} className="InfoTimelineItem">
                 <div className="InfoTimelineItem-info">{this.info}</div>

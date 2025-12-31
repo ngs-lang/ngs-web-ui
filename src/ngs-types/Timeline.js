@@ -6,10 +6,10 @@ export class Timeline {
         this.children = children;
     }
 
-    toWidget() {
+    toWidget(ctx) {
         return <div className="Timeline">
         {
-            this.children.map(c => c.toWidget())
+            this.children.map(c => c.toWidget(ctx))
         }
         </div>
     }

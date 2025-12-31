@@ -7,10 +7,10 @@ export class Table {
         this.rows = rows;
     }
 
-    toWidget() {
+    toWidget(ctx) {
         return <table className={'Table'}>
-            {this.columns.toWidget()}
-            {this.rows.toWidget()}
+            {this.columns.toWidget(ctx)}
+            {this.rows.toWidget(ctx)}
         </table>
     }
 }

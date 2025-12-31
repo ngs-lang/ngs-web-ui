@@ -1,15 +1,28 @@
-import React, {Component} from 'react';
+import React, {Component, createRef} from 'react';
 import connector from "./Connector";
+import {ToWidgetContext} from "./ToWidgetContext";
 
 class TimelineContainer extends Component {
 
     constructor(props) {
         super(props);
         this.state = {'timeline': null};
+        this.elementToScroll = createRef(null);
         connector.addEventListener('timeline', (e) => {
             console.log('TimelineContainer got timeline', e.detail);
-            this.setState({'timeline': e.detail.toWidget()});
+            const ctx = new ToWidgetContext();
+            ctx.timelineElementToScrollTo = this.elementToScroll;
+            this.setState({'timeline': e.detail.toWidget(ctx)});
         })
+    }
+
+    componentDidUpdate() {
+        console.log('elementToScroll', this.elementToScroll);
+        if(!this.elementToScroll.current) {
+            console.warn('TimelineContainer#componentDidUpdate but there is no element to scroll to');
+            return;
+        }
+        this.elementToScroll.current.scrollIntoView(false);
     }
 
     clear() {

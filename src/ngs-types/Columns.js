@@ -6,12 +6,12 @@ export class Columns {
         this.children = children;
     }
 
-    toWidget() {
+    toWidget(ctx) {
         return <thead className={'Columns'}>
             <tr className={'Columns'}>
                 {
                     this.children.map((v, i) =>
-                        <th key={i}>{v.toWidget()}</th>
+                        <th key={i}>{v.toWidget(ctx)}</th>
                     )
                 }
             </tr>

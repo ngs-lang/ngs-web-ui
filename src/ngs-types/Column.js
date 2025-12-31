@@ -6,7 +6,7 @@ export class Column {
         this.name = name;
     }
 
-    toWidget() {
+    toWidget(_ctx) {
         return <div className={'Column'}>{this.name}</div>
     }
 

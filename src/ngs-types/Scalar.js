@@ -4,7 +4,7 @@ export class Scalar {
     constructor({value}) {
         this.value = value;
     }
-    toWidget() {
+    toWidget(_ctx) {
         if (this.value === null) {
             return <span className="unobtrusive">-</span>
         }

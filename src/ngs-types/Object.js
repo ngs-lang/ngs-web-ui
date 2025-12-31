@@ -8,7 +8,7 @@ export class Object_ {
         this.children = children;
     }
 
-    toWidget() {
+    toWidget(ctx) {
 
         // WIP
         function onClick(event) {
@@ -21,7 +21,7 @@ export class Object_ {
         return <div className={'Object'} title={'DEBUG ' + JSON.stringify({cur: this.cur, ref: this.ref})} onClick={onClick.bind(this)}>
             {
                 this.children.map((v, i) =>
-                    <div key={i}>{v.toWidget()}</div>
+                    <div key={i}>{v.toWidget(ctx)}</div>
                 )
             }
         </div>

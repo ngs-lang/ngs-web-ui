@@ -6,7 +6,7 @@ export class Properties {
         console.log('Properties', this.props);
     }
 
-    toWidget() {
+    toWidget(ctx) {
         return <table className={'Properties'}>
             <tbody>
             {
@@ -14,7 +14,7 @@ export class Properties {
                     <tr>
                         <td>{k}</td>
                         {/*<td>WIDGET {JSON.stringify(v)}</td>*/}
-                        <td>{v.toWidget()}</td>
+                        <td>{v.toWidget(ctx)}</td>
                     </tr>
                 )
             }

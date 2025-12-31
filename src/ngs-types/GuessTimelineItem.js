@@ -7,7 +7,7 @@ export class GuessTimelineItem {
         this.description = description;
     }
 
-    toWidget() {
+    toWidget(_ctx) {
         return (
             <div key={this.id} className="GuessTimelineItem">
                 <div>WIP: there will be option to select from several guesses and edit the pattern manually.</div>

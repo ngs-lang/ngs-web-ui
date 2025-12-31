@@ -7,12 +7,12 @@ export class Row {
     }
 
 
-    toWidget() {
+    toWidget(ctx) {
         return <>
         {
             this.children.map((cell, i) =>
                 <td key={i}>
-                    {cell.toWidget()}
+                    {cell.toWidget(ctx)}
                 </td>
             )
         }
