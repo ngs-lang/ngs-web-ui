@@ -17,7 +17,6 @@ class TimelineContainer extends Component {
     }
 
     componentDidUpdate() {
-        console.log('elementToScroll', this.elementToScroll);
         if(!this.elementToScroll.current) {
             console.warn('TimelineContainer#componentDidUpdate but there is no element to scroll to');
             return;
