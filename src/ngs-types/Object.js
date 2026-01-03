@@ -11,10 +11,10 @@ export class Object_ {
     toWidget(ctx) {
 
         // WIP
-        function onClick(event) {
+        async function onClick(event) {
             event.preventDefault()
             console.log('Object_ onClick', this);
-            this.call_id = connector.call('ui_default_action', {cur: this.cur, ref: this.ref});
+            this.call_id = await connector.call('ui_default_action', {cur: this.cur, ref: this.ref}); 
             // connector.addEventListener('message', listener);
         }
 
