@@ -112,6 +112,11 @@ td {
 .Object {
   cursor: pointer;
   text-decoration: underline;
+  text-decoration-style: dotted;
+}
+
+.Object.Ref {
+  text-decoration-style: solid;
 }
 
 .Object:hover {

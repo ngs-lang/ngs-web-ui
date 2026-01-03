@@ -18,7 +18,9 @@ export class Object_ {
             // connector.addEventListener('message', listener);
         }
 
-        return <div className={'Object'} title={'DEBUG ' + JSON.stringify({cur: this.cur, ref: this.ref})} onClick={onClick.bind(this)}>
+        const refClass = this.ref ? ' Ref': '';
+
+        return <div className={`Object${refClass}`} title={'DEBUG ' + JSON.stringify({cur: this.cur, ref: this.ref})} onClick={onClick.bind(this)}>
             {
                 this.children.map((v, i) =>
                     <div key={i}>{v.toWidget(ctx)}</div>
