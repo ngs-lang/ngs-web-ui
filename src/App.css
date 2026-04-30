@@ -123,3 +123,7 @@ td {
   cursor: pointer;
   background-color: #FFFFEE;
 }
+
+.Tree-children {
+  padding-left: 1em;
+}

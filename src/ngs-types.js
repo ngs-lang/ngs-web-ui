@@ -2,6 +2,7 @@ import {Scalar} from "./ngs-types/Scalar";
 import {List} from "./ngs-types/List";
 import {Properties} from "./ngs-types/Properties";
 import {Timeline} from "./ngs-types/Timeline";
+import {Tree} from "./ngs-types/Tree";
 import {GroupTimelineItem} from "./ngs-types/GroupTimelineItem";
 import {TextualCommandTimelineItem} from "./ngs-types/TextualCommandTimelineItem";
 import {InfoTimelineItem} from "./ngs-types/InfoTimelineItem";
@@ -22,6 +23,7 @@ const types = {
     Scalar,
     List,
     Properties,
+    Tree,
 
     GroupTimelineItem,
     Timeline,
