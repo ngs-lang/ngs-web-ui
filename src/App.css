@@ -127,3 +127,19 @@ td {
 .Tree-children {
   padding-left: 1em;
 }
+
+.Section {
+  border: 1px solid #CCC;
+  border-radius: 0.25em;
+  margin: 0.5em 0;
+}
+
+.Section-header {
+  background-color: #F0F0F0;
+  padding: 0.25em 0.5em;
+  border-bottom: 1px solid #CCC;
+}
+
+.Section-body {
+  padding: 0.25em 0.5em;
+}

@@ -17,6 +17,7 @@ import {Rows} from "./ngs-types/Rows";
 import {Progress} from "./ngs-types/Progress";
 import {ProcessStatus} from "./ngs-types/ProcessStatus";
 import {Object_} from "./ngs-types/Object";
+import {Section} from "./ngs-types/Section";
 //
 // Reorganize: 'types' should be in a separate file
 const types = {
@@ -34,6 +35,7 @@ const types = {
     ResultTimelineItem,
 
     Object: Object_,
+    Section,
     ProcessStatus,
     Progress,
 
