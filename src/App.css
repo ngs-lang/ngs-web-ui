@@ -109,6 +109,22 @@ td {
   color: #A44;
 }
 
+.status-InProgress {
+  color: #AA4;
+}
+
+.status-NotStarted {
+  color: #888;
+}
+
+.status-Stopping {
+  color: #A84;
+}
+
+.status-Stopped {
+  color: #888;
+}
+
 .Object {
   cursor: pointer;
   text-decoration: underline;
