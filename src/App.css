@@ -159,3 +159,10 @@ td {
 .Section-body {
   padding: 0.25em 0.5em;
 }
+
+.Horizontal {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5em;
+  align-items: baseline;
+}
