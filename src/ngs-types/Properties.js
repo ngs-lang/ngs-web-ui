@@ -10,7 +10,7 @@ export class Properties {
         return <table className={'Properties'}>
             <tbody>
             {
-                Object.entries(this.props).map(([k, v]) =>
+                Object.entries(this.props).filter(([, v]) => v !== null).map(([k, v]) =>
                     <tr>
                         <td>{k}</td>
                         {/*<td>WIDGET {JSON.stringify(v)}</td>*/}
