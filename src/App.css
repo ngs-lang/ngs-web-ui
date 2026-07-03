@@ -41,8 +41,15 @@
   opacity: 50%;
 }
 
-.StatusLine a {
-  color: #FFF;
+.AppMeta {
+  margin-top: auto;
+  padding: 0.5rem;
+  text-align: left;
+  color: var(--text-unobtrusive);
+}
+
+.AppMeta a {
+  color: var(--text-unobtrusive);
 }
 
 .TimelineContainer {
@@ -56,79 +63,153 @@
 }
 
 .GroupTimelineItem {
-  border: 1px solid #EEE;
-  border-radius: 0.25em;
-  margin: 1em;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  margin: 1rem;
 }
 
 .CommandTimelineItem-command {
-  background-color: #EEEEEE;
-  padding: 0.5em;
+  padding: 0.5rem 0.875rem;
+  font-family: var(--mono);
+  font-size: 0.8125rem;
 }
 
 .InfoTimelineItem-info {
-  color: #888;
-  padding: 0.5em;
+  color: var(--text-unobtrusive);
+  padding: 0.5rem;
   font-style: italic;
 }
 
 .GuessTimelineItem {
-  padding: 0.5em;
+  color: var(--text-unobtrusive);
+  padding: 0.5rem;
   font-style: italic;
 }
 
 .ResultTimelineItem {
-  padding: 0.5em;
+  padding: 0.5rem 0.875rem;
+  background: var(--surface-alt);
+  border-top: 1px solid var(--border);
+  overflow-x: auto;
+}
+
+.ResultTimelineItem pre {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  line-height: 1.55;
+  max-height: 16.25rem;
+  overflow: auto;
 }
 
 .CommandLine {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 1em;
-  text-align: center;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.25rem;
+  border-top: 1px solid var(--border);
+  border-left: 1px solid var(--border);
+  background: var(--surface);
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+}
+
+.CommandLine-prompt {
+  color: var(--text-unobtrusive);
+}
+
+.CommandLine-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  color: var(--text);
+  caret-color: var(--accent);
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+}
+
+.Table {
+  border-collapse: collapse;
+  border: 1px solid var(--border);
+}
+
+.Table > thead > tr > th {
+  border-bottom: 1px solid var(--border);
+  padding: 0.25rem 0.5rem;
+  text-align: left;
+  font-weight: bold;
+}
+
+.Table > tbody > tr > td {
+  border-bottom: 1px solid var(--border);
 }
 
 td {
-  padding: 0.25em;
-}
-
-.MoreInfo {
-  border-bottom: dotted;
+  padding: 0.25rem 0.5rem;
 }
 
 .ItemName {
   font-weight: bold;
 }
 
-.status-Succeeded {
-  color: #4A4;
-}
-
-.status-Failed {
-  color: #A44;
+.status-NotStarted {
+  color: var(--pending);
 }
 
 .status-InProgress {
-  color: #AA4;
-}
-
-.status-NotStarted {
-  color: #888;
+  color: var(--running);
 }
 
 .status-Stopping {
-  color: #A84;
+  color: var(--running);
 }
 
 .status-Stopped {
-  color: #888;
+  color: var(--stopped);
+}
+
+.status-Succeeded {
+  color: var(--success);
+}
+
+.status-Failed {
+  color: var(--failure);
+}
+
+progress {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 0.3rem;
+  border: none;
+  background: var(--progress-bg);
+}
+
+progress::-webkit-progress-bar {
+  background: var(--progress-bg);
+}
+
+progress::-webkit-progress-value {
+  background: var(--accent);
+}
+
+progress::-moz-progress-bar {
+  background: var(--accent);
 }
 
 .Object {
   cursor: pointer;
   text-decoration: underline;
   text-decoration-style: dotted;
+  text-underline-offset: 0.3rem;
+  border-radius: 3px;
 }
 
 .Object.Ref {
@@ -136,8 +217,7 @@ td {
 }
 
 .Object:hover {
-  cursor: pointer;
-  background-color: #FFFFEE;
+  background-color: color-mix(in srgb, var(--accent) 12%, transparent);
 }
 
 .Tree-children {
@@ -145,24 +225,24 @@ td {
 }
 
 .Section {
-  border: 1px solid #CCC;
-  border-radius: 0.25em;
-  margin: 0.5em 0;
+  border: 1px solid var(--border);
+  border-radius: 0.25rem;
+  margin: 0.5rem 0;
 }
 
 .Section-header {
-  background-color: #F0F0F0;
-  padding: 0.25em 0.5em;
-  border-bottom: 1px solid #CCC;
+  background-color: var(--surface-alt);
+  padding: 0.25rem 0.5rem;
+  border-bottom: 1px solid var(--border);
 }
 
 .Section-body {
-  padding: 0.25em 0.5em;
+  padding: 0.25rem 0.5rem;
 }
 
 .Horizontal {
   display: flex;
   flex-direction: row;
-  gap: 0.5em;
+  gap: 1rem;
   align-items: baseline;
 }

@@ -32,7 +32,8 @@ class CommandLine extends Component {
     render() {
         return (
             <div className="CommandLine">
-                <input type="text" value={this.state.line} style={{width: "90%"}} onChange={this.handleChange} onKeyUp={this.keyUp} autoFocus></input>
+                <span className="CommandLine-prompt">ngs $</span>
+                <input className="CommandLine-input" type="text" value={this.state.line} onChange={this.handleChange} onKeyUp={this.keyUp} autoFocus></input>
             </div>
         );
     }
